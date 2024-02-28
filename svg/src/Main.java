@@ -8,6 +8,8 @@ public class Main {
 
          Segment seg= new Segment(point, new Point(6.7, 8.5));
 
-        System.out.println(seg.length());
+//        System.out.println(seg.length());
+        System.out.println(seg.toSvg());
+
     }
 }
