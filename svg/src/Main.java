@@ -3,13 +3,17 @@
 public class Main {
     public static void main(String[] args) {
          Point point;
-         point=new Point(2.4, 5.5);
-         System.out.println(point);
+         point=new Point(20, 50);
+//         System.out.println(point);
 
-         Segment seg= new Segment(point, new Point(6.7, 8.5));
+         Segment seg= new Segment(point, new Point(60, 40));
 
 //        System.out.println(seg.length());
         System.out.println(seg.toSvg());
+
+        Segment[] p_seg = Segment.perpendicularTo(seg, point);
+        System.out.println(p_seg[0].toSvg());
+        System.out.println(p_seg[1].toSvg());
 
     }
 }

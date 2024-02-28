@@ -25,4 +25,18 @@ public class Segment {
         return Math.hypot(end.x -start.x, end.y- start.y);
     }
 
+    public static Segment[] perpendicularTo(Segment s, Point p) {
+        double dx = s.end.x - s.start.x;
+        double dy = s.end.y - s.start.y;
+
+        return new Segment[] {
+                new Segment(p, new Point(
+                        p.x - dy, p.y + dx
+                )),
+                new Segment(p, new Point(
+                        p.x + dy, p.y - dx
+                )),
+        };
+    }
+
 }
