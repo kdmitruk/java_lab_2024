@@ -2,7 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-         Point point;
+      /*   Point point;
          point=new Point(20, 50);
 //         System.out.println(point);
 
@@ -13,7 +13,13 @@ public class Main {
 
         Segment[] p_seg = Segment.perpendicularTo(seg, point);
         System.out.println(p_seg[0].toSvg());
-        System.out.println(p_seg[1].toSvg());
+        System.out.println(p_seg[1].toSvg()); */
+        Polygon poly = new Polygon(new Point[]{
+                new Point (30, 70),
+                new Point (60, 80),
+                new Point (50, 40)
+        });
+        System.out.println(poly.toSvg());
 
     }
 }
