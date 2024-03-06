@@ -15,19 +15,22 @@ public class Main {
         System.out.println(p_seg[0].toSvg());
         System.out.println(p_seg[1].toSvg()); */
         Polygon poly = new Polygon(new Point[]{
-                new Point (30, 70),
-                new Point (60, 80),
-                new Point (50, 40)
+                new Point(30, 70),
+                new Point(60, 80),
+                new Point(50, 40)
         });
-        Style style= new Style("pink","black",6.0);
-        Polygon polygon= new Polygon(new Point[]{
-                new Point (500, 100),
-                new Point (220, 20),
-                new Point (400, 25),
-                new Point (70, 33),
-        },style);
+        Style style = new Style("pink", "black", 6.0);
+        Polygon polygon = new Polygon(new Point[]{
+                new Point(500, 100),
+                new Point(220, 20),
+                new Point(400, 25),
+                new Point(70, 33),
+        }, style);
         System.out.println(polygon.toSvg());
         System.out.println(poly.toSvg());
-
+        Scene scene = new Scene();
+        scene.add(polygon);
+        scene.add(poly);
+        scene.save("/tmp/out.html");
     }
 }
