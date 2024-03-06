@@ -19,6 +19,14 @@ public class Main {
                 new Point (60, 80),
                 new Point (50, 40)
         });
+        Style style= new Style("pink","black",6.0);
+        Polygon polygon= new Polygon(new Point[]{
+                new Point (500, 100),
+                new Point (220, 20),
+                new Point (400, 25),
+                new Point (70, 33),
+        },style);
+        System.out.println(polygon.toSvg());
         System.out.println(poly.toSvg());
 
     }
