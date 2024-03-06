@@ -29,8 +29,10 @@ public class Main {
         System.out.println(polygon.toSvg());
         System.out.println(poly.toSvg());
         Scene scene = new Scene();
+        Ellipse ellipse = new Ellipse(style, new Point(100, 200), 50.5, 75.7);
         scene.add(polygon);
         scene.add(poly);
+        scene.add(ellipse);
         scene.save("/tmp/out.html");
     }
 }

@@ -1,18 +1,19 @@
 import java.util.Locale;
 
-public class Polygon {
+public class Polygon extends Shape{
     private Point[] points;
-    private Style style;
+
 
     public Polygon(Point[] points) {
         this.points = points;
-        this.style = new Style();
+
  }
     public Polygon(Point[] points, Style style) {
+        super(style);
         this.points = points;
-        this.style = style;
-    }
 
+    }
+    @Override
     public Point getBound() {
         double x = 0, y = 0;
         for (int i = 0; i < points.length; i++) {
@@ -21,7 +22,7 @@ public class Polygon {
         }
         return new Point(x, y);
     }
-
+    @Override
     public String toSvg (){
         String result = "";
         for(int i=0; i<this.points.length; i++)

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Scene {
-    private ArrayList<Polygon> shapes = new ArrayList<>();
-    public void add(Polygon polygon)
+    private ArrayList<Shape> shapes = new ArrayList<>();
+    public void add(Shape polygon)
     {
         shapes.add(polygon);
     }
@@ -13,7 +13,7 @@ public class Scene {
         double x = 0, y = 0;
         for (Point p : shapes
                 .stream()
-                .map(Polygon::getBound)
+                .map(Shape::getBound)
                 .toList()) {
             x = Math.max(x, p.x);
             y = Math.max(y, p.y);
@@ -34,7 +34,7 @@ public class Scene {
                             bounds.y
                     )
             );
-            for(Polygon polygon : shapes)
+            for(Shape polygon : shapes)
                 fileWriter.write("\t" + polygon.toSvg() + "\n");
             fileWriter.write("</svg>");
             fileWriter.write("</body>");
