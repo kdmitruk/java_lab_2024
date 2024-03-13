@@ -18,14 +18,20 @@ public class Polygon extends Shape{
         }
         return new Vec2(x, y);
     }
+
     @Override
-    public String toSvg (){
+    public String toSvg() {
+        return this.toSvg("");
+    }
+
+
+    public String toSvg (String parameters){
         String result = "";
         for(int i=0; i<this.points.length; i++)
         {
             result += String.format(Locale.ENGLISH, "%f,%f " , points[i].x, points[i].y );
         }
         return String.format(Locale.ENGLISH,
-                "<polygon points=\"%s\" />", result);
+                "<polygon points=\"%s\" %s/>", result,parameters);
     }
 }
