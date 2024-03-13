@@ -1,21 +1,20 @@
 import java.util.Locale;
 
 public class Ellipse extends Shape{
-    private Point center;
+    private Vec2 center;
     private double rx, ry;
     @Override
-    public Point getBound() {
-        return new Point(center.x + rx + style.strokeWidth, center.y + ry + style.strokeWidth);
+    public Vec2 getBound() {
+        return new Vec2(center.x + rx, center.y + ry);
     }
 
     @Override
     public String toSvg() {
-        return String.format(Locale.ENGLISH,"<ellipse rx=\"%f\" ry=\"%f\" cx=\"%f\" cy=\"%f\"\n" +
-                "  style=\"%s\" />",rx,ry,center.x,center.y, style.toSvg());
+        return String.format(Locale.ENGLISH,"<ellipse rx=\"%f\" ry=\"%f\" cx=\"%f\" cy=\"%f\"/>",
+                rx,ry,center.x,center.y);
     }
 
-    public Ellipse(Style style, Point center, double rx, double ry) {
-        super(style);
+    public Ellipse(Vec2 center, double rx, double ry) {
         this.center = center;
         this.rx = rx;
         this.ry = ry;

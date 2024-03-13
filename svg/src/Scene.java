@@ -1,7 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Scene {
     private ArrayList<Shape> shapes = new ArrayList<>();
@@ -9,22 +8,22 @@ public class Scene {
     {
         shapes.add(polygon);
     }
-    public Point getBounds() {
+    public Vec2 getBounds() {
         double x = 0, y = 0;
-        for (Point p : shapes
+        for (Vec2 p : shapes
                 .stream()
                 .map(Shape::getBound)
                 .toList()) {
             x = Math.max(x, p.x);
             y = Math.max(y, p.y);
         }
-        return new Point(x, y);
+        return new Vec2(x, y);
     }
     public void save(String path)
     {
         try {
             FileWriter fileWriter = new FileWriter(path);
-            Point bounds = getBounds();
+            Vec2 bounds = getBounds();
             fileWriter.write("<HTML>");
             fileWriter.write("<body>");
             fileWriter.write(
