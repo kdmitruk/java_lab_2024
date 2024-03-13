@@ -30,7 +30,7 @@ public class Main {
                 new Vec2(400, 25),
                 new Vec2(70, 33),
         });
-        polygon = new SolidFillShapeDecorator(polygon, "red");
+        //polygon = new SolidFillShapeDecorator(polygon, "red");
 
         Shape ellipse = new Ellipse(new Vec2(100, 200), 50.5, 75.7);
         ellipse = new SolidFillShapeDecorator(ellipse,"blue");
@@ -40,6 +40,13 @@ public class Main {
                 .build(ellipse);
 
         ellipse = new DropShadowDecorator(ellipse);
+
+        polygon = new GradientFillShapeDecorator.Builder()
+                .setShape(polygon)
+                .addStop(0, "red")
+                .addStop(0.3, "white")
+                .addStop(1, "cyan")
+                .build();
 
         TransformationDecorator.Builder builder = new TransformationDecorator.Builder();
         Shape s = builder
