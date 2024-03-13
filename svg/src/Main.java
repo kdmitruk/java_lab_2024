@@ -35,9 +35,23 @@ public class Main {
         Shape ellipse = new Ellipse(new Vec2(100, 200), 50.5, 75.7);
         ellipse = new SolidFillShapeDecorator(ellipse,"blue");
 
-        Scene scene = new Scene();
+        ellipse = new TransformationDecorator.Builder()
+                .rotate(1, new Vec2(0, 0))
+                .build(ellipse);
+
+        ellipse = new DropShadowDecorator(ellipse);
+
+        TransformationDecorator.Builder builder = new TransformationDecorator.Builder();
+        Shape s = builder
+                .rotate(-50, new Vec2(0, 0))
+                .translate(new Vec2(50, 60))
+                .scale(new Vec2(1, 1.5))
+                .build(new Ellipse(new Vec2(40, 50), 20, 40));
+
+        Scene scene = Scene.getInstance();
         scene.add(polygon);
         scene.add(ellipse);
+        scene.add(s);
 
         scene.save("/tmp/out.html");
 
