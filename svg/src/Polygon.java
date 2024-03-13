@@ -1,6 +1,6 @@
 import java.util.Locale;
 
-public class Polygon extends Shape{
+public class Polygon implements Shape{
     private Vec2[] points;
 
 
@@ -19,10 +19,6 @@ public class Polygon extends Shape{
         return new Vec2(x, y);
     }
 
-    @Override
-    public String toSvg() {
-        return this.toSvg("");
-    }
 
 
     public String toSvg (String parameters){

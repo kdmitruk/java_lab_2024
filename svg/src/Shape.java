@@ -1,5 +1,5 @@
-abstract public class Shape {
-    abstract public Vec2 getBound();
-    abstract public String toSvg();
+public interface Shape {
+      Vec2 getBound();
+      String toSvg(String param);
 
 }

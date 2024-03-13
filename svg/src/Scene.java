@@ -34,7 +34,7 @@ public class Scene {
                     )
             );
             for(Shape polygon : shapes)
-                fileWriter.write("\t" + polygon.toSvg() + "\n");
+                fileWriter.write("\t" + polygon.toSvg("") + "\n");
             fileWriter.write("</svg>");
             fileWriter.write("</body>");
             fileWriter.write("</HTML>");
