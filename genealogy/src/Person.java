@@ -1,5 +1,8 @@
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Person {
     private final String name;
@@ -27,5 +30,17 @@ public class Person {
                 ", birthDate=" + birthDate +
                 ", deathDate=" + deathDate +
                 '}';
+    }
+
+    public static List<Person> fromCsv(String path) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(path));
+        List<Person> people = new ArrayList<>();
+        String line;
+        reader.readLine();
+        while((line = reader.readLine()) != null){
+            people.add(Person.fromCsvLine(line));
+        }
+        reader.close();
+        return people;
     }
 }
