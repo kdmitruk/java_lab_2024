@@ -10,10 +10,14 @@ public class Main {
         PlantUMLRunner.setJarPath("./plantuml-1.2024.3.jar");
         try {
             List<Person> people = Person.fromCsv("family.csv");
-            for(Person person : people){
-                //System.out.println(person.generateTree());
-               PlantUMLRunner.generate(person.generateTree(),"image_output", person.getName());
-            }
+            PlantUMLRunner.generate(
+                    Person.generateTree(people),
+                    "image_output", "all"
+                    );
+//            for (Person person : people) {
+//                System.out.println(person.generateTree());
+//                PlantUMLRunner.generate(person.generateTree(), "image_output", person.getName());
+//            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

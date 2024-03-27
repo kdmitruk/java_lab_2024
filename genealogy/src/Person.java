@@ -1,10 +1,8 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -115,5 +113,27 @@ public class Person {
         });
         result=String.format(result,objects,relations);
         return result;
+    }
+
+
+    public static String generateTree(List<Person> people) {
+        String result = "@startuml\n%s\n%s\n@enduml";
+        Function<String, String> objectName = str -> str.replaceAll(" ", "");
+        Function<String, String> objectLine = str -> String.format("object \"%s\" as %s",str, objectName.apply(str));
+
+        Set<String> objects = new HashSet<>();
+        Set<String> relations = new HashSet<>();
+
+        Consumer<Person> addPerson = person -> {
+            objects.add(objectLine.apply(person.name));
+            for (Person parent : person.parents)
+                relations.add(objectName.apply(parent.name) + "<--" + objectName.apply(person.name));
+        };
+
+        people.forEach(addPerson);
+        String objectString = String.join("\n", objects);
+        String relationString = String.join("\n", relations);
+
+        return String.format(result, objectString, relationString);
     }
 }
