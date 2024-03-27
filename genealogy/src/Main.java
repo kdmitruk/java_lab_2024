@@ -11,7 +11,10 @@ public class Main {
         try {
             List<Person> people = Person.fromCsv("family.csv");
             PlantUMLRunner.generate(
-                    Person.generateTree(people, text->text+" #FFFF00"),
+                    Person.generateTree(people,
+                            //person -> Person.sortByLifespan(people).contains(person),
+                            person -> Person.findOldestLiving(people) == person,
+                            text->text+" #FFFF00"),
                     "image_output", "all"
                     );
 //            for (Person person : people) {

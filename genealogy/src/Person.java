@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Person {
@@ -113,21 +114,30 @@ public class Person {
     }
 
 
-    public static String generateTree(List<Person> people,Function<String,String> postprocess) {
+    public static String generateTree(List<Person> people, Predicate<Person> condition, Function<String, String> postProcess) {
         String result = "@startuml\n%s\n%s\n@enduml";
-        Function<String, String> objectName = str -> str.replaceAll(" ", "");
-        Function<String, String> objectLine = str -> String.format("object \"%s\" as %s", str, objectName.apply(str));
-        Function<String, String> objectLineWithPostprocess = objectLine.andThen(postprocess);
-        Set<String> objects = new HashSet<>();
-        Set<String> relations = new HashSet<>();
+        Function<String, String> objectName = str -> str.replaceAll("\\s+", "");
+        Function<String, String> objectLine = str -> String.format("object \"%s\" as %s",str, objectName.apply(str));
+        Function<String, String> objectLineAndPostprocess = objectLine.andThen(postProcess);
 
-        Consumer<Person> addPerson = person -> {
-            objects.add(objectLineWithPostprocess.apply(person.name));
-            for (Person parent: person.parents)
-                relations.add(objectName.apply(parent.name) + "<--" + objectName.apply(person.name));
-        };
+        Map<Boolean, List<Person>> groupedPeople = people.stream()
+                .collect(Collectors.partitioningBy(condition));
 
-        people.forEach(addPerson);
+        Set<String> objects = groupedPeople.get(true).stream()
+                .map(person -> person.name)
+                .map(objectLineAndPostprocess)
+                .collect(Collectors.toSet());
+        objects.addAll(groupedPeople.get(false).stream()
+                .map(person -> person.name)
+                .map(objectLine)
+                .collect(Collectors.toSet())
+        );
+
+        Set<String> relations = people.stream()
+                .flatMap(person -> person.parents.stream()
+                        .map(parent -> objectName.apply(parent.name) + "<--" + objectName.apply(person.name)))
+                .collect(Collectors.toSet());
+
         String objectString = String.join("\n", objects);
         String relationString = String.join("\n", relations);
 
