@@ -113,16 +113,16 @@ public class Person {
     }
 
 
-    public static String generateTree(List<Person> people) {
+    public static String generateTree(List<Person> people,Function<String,String> postprocess) {
         String result = "@startuml\n%s\n%s\n@enduml";
         Function<String, String> objectName = str -> str.replaceAll(" ", "");
         Function<String, String> objectLine = str -> String.format("object \"%s\" as %s", str, objectName.apply(str));
-
+        Function<String, String> objectLineWithPostprocess = objectLine.andThen(postprocess);
         Set<String> objects = new HashSet<>();
         Set<String> relations = new HashSet<>();
 
         Consumer<Person> addPerson = person -> {
-            objects.add(objectLine.apply(person.name));
+            objects.add(objectLineWithPostprocess.apply(person.name));
             for (Person parent: person.parents)
                 relations.add(objectName.apply(parent.name) + "<--" + objectName.apply(person.name));
         };
@@ -156,5 +156,13 @@ public class Person {
 //                .sorted(Comparator.comparingLong(getLifespan::apply))
 //                .sorted(Collections.reverseOrder())
                 .toList();
+    }
+
+    public static Person findOldestLiving(List<Person> people){
+        return people.stream()
+                .filter(person -> person.deathDate == null)
+                .min(Comparator.comparing(Person::getBirthDate))
+                .orElse(null);
+
     }
 }
