@@ -133,4 +133,10 @@ public class Person {
 
         return String.format(result, objectString, relationString);
     }
+
+    public static List<Person> filterByName(List<Person> people, String text){
+        return people.stream()
+                .filter(person -> person.getName().contains(text))
+                .collect(Collectors.toList());
+    }
 }
