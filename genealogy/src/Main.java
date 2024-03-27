@@ -18,7 +18,9 @@ public class Main {
 //                System.out.println(person.generateTree());
 //                PlantUMLRunner.generate(person.generateTree(), "image_output", person.getName());
 //            }
-            Person.filterByName(people, "Kowalsk").forEach(System.out::println);
+            //Person.filterByName(people, "Kowalsk").forEach(System.out::println);
+//            Person.sortedByBirth(people).forEach(System.out::println);
+            Person.sortByLifespan(people).forEach(System.out::println);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
