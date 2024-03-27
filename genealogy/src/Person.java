@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Person {
     private final String name;
@@ -97,5 +99,21 @@ public class Person {
                 throw new AmbiguousPersonException(person);
             }
         }
+    }
+    //object "Janusz Kowalski" as JanuszKowalski
+    public String generateTree(){
+        String result="@startuml\n%s\n%s\n@enduml";
+        Function<Person,String> objectName=person->person.getName().replaceAll(" ","");
+        Function<Person,String> objectLine=person -> String.format("object \"%s\" as %s",person.getName(),objectName.apply(person));
+        //result=String.format(result,objectLine.apply(this));
+        StringBuilder objects=new StringBuilder();
+        StringBuilder relations=new StringBuilder();
+        objects.append(objectLine.apply(this)).append("\n");
+        parents.forEach(parent->{
+            objects.append(objectLine.apply(parent)).append("\n");
+            relations.append(String.format("%s <-- %s\n",objectName.apply(parent),objectName.apply(this)));
+        });
+        result=String.format(result,objects,relations);
+        return result;
     }
 }
