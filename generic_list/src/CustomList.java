@@ -26,6 +26,7 @@ public class CustomList<T> extends AbstractList<T> {
     public int size() {
         return size;
     }
+
     @Override
     public T get(int index) {
         Node n = head;
@@ -73,11 +74,12 @@ public class CustomList<T> extends AbstractList<T> {
         return head.value;
     }
 
-    public void removeLast() {
+    public T removeLast() {
         if (tail == null) throw new NoSuchElementException("Trying to remove element from empty list");
         assert head != null;
-
+        T result;
         if (head == tail) {
+            result = tail.value;
             head = tail = null;
         } else {
             Node n = head;
@@ -86,14 +88,18 @@ public class CustomList<T> extends AbstractList<T> {
             }
             tail = n;
             n.next = null;
+            result = n.value;
         }
         size--;
+        return result;
     }
 
-    public void removeFirst() {
+    public T removeFirst() {
         if (head == null) throw new NoSuchElementException("Trying to remove element from empty list");
+        T result = head.value;
         head = head.next;
         size--;
+        return result;
     }
 
     @Override
