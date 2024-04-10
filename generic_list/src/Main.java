@@ -35,6 +35,15 @@ public class Main {
         //}
             for (int i = 0; i < list.size(); i++)
                 System.out.print(list.get(i));
+
+            for(Integer i : list){
+                System.out.println(i);
+            }
+
+            list.stream()
+                    .map(i -> i+10)
+                    .forEach(System.out::println);
+
         }
     }
 }
