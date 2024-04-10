@@ -1,6 +1,8 @@
+import java.util.AbstractList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
-public class CustomList<T> {
+public class CustomList<T> extends AbstractList<T> {
 
     private class Node {
         public Node next;
@@ -13,10 +15,27 @@ public class CustomList<T> {
     }
 
     private Node head, tail;
+    private int size = 0;
 
     public CustomList() {
         this.head = null;
         this.tail = null;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+    @Override
+    public T get(int index) {
+        Node n = head;
+        for (int i=0; i<index; i++){
+            n = n.next;
+            if(n == null) {
+                throw new NoSuchElementException("index is out of bounds");
+            }
+        }
+        return n.value;
     }
 
     public void addLast(T value) {
@@ -28,6 +47,7 @@ public class CustomList<T> {
             tail.next = new Node(value);
             tail = tail.next;
         }
+        size++;
     }
 
     public void addFirst(T value) {
@@ -40,6 +60,7 @@ public class CustomList<T> {
             newHead.next = head;
             head = newHead;
         }
+        size++;
     }
 
     public T getLast() {
@@ -66,11 +87,13 @@ public class CustomList<T> {
             tail = n;
             n.next = null;
         }
+        size--;
     }
 
     public void removeFirst() {
         if (head == null) throw new NoSuchElementException("Trying to remove element from empty list");
         head = head.next;
+        size--;
     }
 
     @Override
@@ -83,7 +106,8 @@ public class CustomList<T> {
             result.append(n.value).append(" ");
             n = n.next;
         }
-        result.append("]");
+        result.append("] size=");
+        result.append(size);
 
         return result.toString();
     }

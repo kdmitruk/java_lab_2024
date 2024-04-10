@@ -28,10 +28,13 @@ public class Main {
             CustomList<Integer> list = new CustomList<>();
             for (int i = 0; i < 10; i++) list.addLast(i);
             System.out.println(list);
-            for (int i = 0; i < 10; i++) {
+          /* for (int i = 0; i < 10; i++) {
                 list.removeLast();
-                System.out.println(list);
-            }
+
+                System.out.println(list);*/
+        //}
+            for (int i = 0; i < list.size(); i++)
+                System.out.print(list.get(i));
         }
     }
 }
