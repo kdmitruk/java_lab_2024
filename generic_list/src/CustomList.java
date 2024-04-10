@@ -147,4 +147,23 @@ public class CustomList<T> extends AbstractList<T> {
         return result.toString();
     }
 
+    @Override
+    public boolean add(T t) {
+        this.addLast(t);
+        return true;
+    }
+
+    public static <S> List<S> filterByClass(List<S> list, Class<?> cls){
+//        List<S> output = new CustomList<>();
+//
+//        for(S elem : list){
+//            if(cls.isInstance(elem)){
+//                output.add(elem);
+//            }
+//        }
+//
+//        return output;
+        return list.stream().filter(cls::isInstance).toList();
+    }
+
 }
