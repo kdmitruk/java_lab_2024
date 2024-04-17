@@ -8,7 +8,17 @@ public class Main {
         DeathCauseStatisticsList list = new DeathCauseStatisticsList();
         list.repopulate(Path.of("./assets/zgony.csv"));
         //list.getStats().forEach(System.out::println);
-        list.mostDeadlyDiseases(1, 10).forEach(System.out::println);
+
+        var codes = new ICDCodeTabularOptimizedForMemory(
+                Path.of("./assets/icd10.txt")
+        );
+
+        list.mostDeadlyDiseases(90, 1000).forEach(currentStat -> {
+            String code = currentStat.getIcd10();
+            System.out.println(
+                    code + ": " + codes.getDescription(code)
+            );
+        });
 
     }
 }

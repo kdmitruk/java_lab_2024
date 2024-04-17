@@ -18,6 +18,11 @@ public class DeathCauseStatistics {
                     '}';
         }
     }
+
+    public String getIcd10() {
+        return icd10;
+    }
+
     public static DeathCauseStatistics fromCsvLine(String line) {
         Function<String, Integer> parseIntFromCsv = s -> s.equals("-") ? 0 : Integer.parseInt(s);
         DeathCauseStatistics result = new DeathCauseStatistics();
