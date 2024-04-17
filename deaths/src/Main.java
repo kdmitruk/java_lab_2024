@@ -7,7 +7,8 @@ public class Main {
 
         DeathCauseStatisticsList list = new DeathCauseStatisticsList();
         list.repopulate(Path.of("./assets/zgony.csv"));
-        list.getStats().forEach(System.out::println);
+        //list.getStats().forEach(System.out::println);
+        list.mostDeadlyDiseases(1, 10).forEach(System.out::println);
 
     }
 }
