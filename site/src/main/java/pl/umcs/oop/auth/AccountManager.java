@@ -1,5 +1,6 @@
 package pl.umcs.oop.auth;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import pl.umcs.oop.database.DatabaseConnection;
 
 import javax.naming.AuthenticationException;
@@ -29,12 +30,13 @@ public class AccountManager {
     }
 
     public void register(String username, String password) {
+      String hashedPassword =  BCrypt.withDefaults().hashToString(12, password.toCharArray());
         try {
             String insertSQL = "INSERT INTO users (username, password) VALUES (?, ?)";
             PreparedStatement statement = databaseConnection.getConnection().prepareStatement(insertSQL);
 
             statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(2, hashedPassword);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -55,8 +57,10 @@ public class AccountManager {
             if (!result.next()) {
                 throw new AuthenticationException("No such user");
             }
+            String hashedPassword = result.getString(3);
+            boolean okay = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword.toCharArray()).verified;
 
-            if (!result.getString(3).equals(password)) {
+            if (!okay) {
                 throw new AuthenticationException("Wrong password");
             }
 

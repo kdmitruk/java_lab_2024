@@ -14,7 +14,7 @@ public class Main {
         AccountManager accountManager = new AccountManager(dbConnection);
         accountManager.init();
 
-//        accountManager.register("notch", "verysecurepassword");
+   //     accountManager.register("notch", "verysecurepassword");
 
         try {
             Account notch = accountManager.authenticate("notch", "verysecurepassword");
