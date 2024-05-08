@@ -1,6 +1,10 @@
 package pl.umcs.oop.music;
 
+import pl.umcs.oop.database.DatabaseConnection;
+
+import java.sql.*;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Song {
     private final String artist;
@@ -45,6 +49,24 @@ public class Song {
                 ", title='" + title + '\'' +
                 ", duration=" + duration +
                 '}';
+    }
+
+    public static class Persistence {
+        public static Optional<Song> read(int id) throws SQLException {
+            String sql = "SELECT artist, title, length FROM song WHERE id = ?";
+            PreparedStatement statement = DatabaseConnection.getConnection("songs").prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()) {
+                return Optional.of(new Song(
+                        resultSet.getString("artist"),
+                        resultSet.getString("title"),
+                        resultSet.getInt("length")
+                ));
+            }
+            return Optional.empty();
+        }
     }
 }
 
