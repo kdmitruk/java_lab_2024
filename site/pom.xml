@@ -28,4 +28,12 @@
         </dependency>
 
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>kdmitruk</name>
+            <url>https://maven.pkg.github.com/kdmitruk/java_lab_2024</url>
+        </repository>
+    </distributionManagement>
 </project>
