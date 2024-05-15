@@ -11,9 +11,12 @@ public class Main {
 
         try {
             imageProcessor.readImage("/tmp/pobrane.jpeg");
+            imageProcessor.setBrightness(100);
+            imageProcessor.setBrightness(-100);
             imageProcessor.writeImage("obrazek.jpeg");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
