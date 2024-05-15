@@ -34,6 +34,20 @@ public class ImageProcessor {
             }
         }
     }
-
+    public void setBrightness2(int brightness) throws InterruptedException {
+        int threadsCount = Runtime.getRuntime().availableProcessors();
+        Thread[] threads;
+        threads = new Thread[threadsCount];
+        int chunk = image.getHeight()/threadsCount;
+        for(int i=0;i<threadsCount;i++) {
+            int begin = i*chunk;
+            int end = (i == threadsCount-1) ? image.getHeight() : (i+1)*chunk;
+            threads[i] = new Thread(new SetBrightnessWorker(begin, end, brightness, image));
+            threads[i].start();
+        }
+        for(int i=0;i<threadsCount;i++){
+            threads[i].join();
+        }
+    }
 
 }
