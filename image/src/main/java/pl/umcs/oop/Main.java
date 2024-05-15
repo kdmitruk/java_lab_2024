@@ -11,17 +11,23 @@ public class Main {
 
         try {
             imageProcessor.readImage("/tmp/lake.jpg");
-//            imageProcessor.setBrightness(100);
-//            imageProcessor.setBrightness(-100);
+            imageProcessor.setBrightness(10);
+            imageProcessor.setBrightness(-10);
             {
                 long startTime = System.currentTimeMillis();
-                imageProcessor.setBrightness(100);
+                imageProcessor.setBrightness(10);
                 long endTime = System.currentTimeMillis();
                 System.out.println(endTime-startTime);
             }
             {
                 long startTime = System.currentTimeMillis();
-                imageProcessor.setBrightness2(100);
+                imageProcessor.setBrightness2(10);
+                long endTime = System.currentTimeMillis();
+                System.out.println(endTime-startTime);
+            }
+            {
+                long startTime = System.currentTimeMillis();
+                imageProcessor.setBrightnessThreadPool(100);
                 long endTime = System.currentTimeMillis();
                 System.out.println(endTime-startTime);
             }
@@ -29,6 +35,8 @@ public class Main {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+
 
     }
 }
