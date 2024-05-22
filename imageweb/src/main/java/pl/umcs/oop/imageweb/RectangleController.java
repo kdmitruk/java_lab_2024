@@ -1,6 +1,8 @@
 package pl.umcs.oop.imageweb;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -32,6 +34,12 @@ public class RectangleController {
         result.append("</svg>");
         return result.toString();
     }
+
+    @PostMapping("rect")
+    public void postrect(@RequestBody Rectangle rectangle){
+        rectangles.add(rectangle);
+    }
+    // curl -X POST -H 'Content-Type:application/json' -d '{"x": 50, "y": 70, "w": 30, "h": 60, "color": "blue"}' localhost:8080/rect
 
 
 
