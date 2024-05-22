@@ -1,9 +1,6 @@
 package pl.umcs.oop.imageweb;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +38,19 @@ public class RectangleController {
     }
     // curl -X POST -H 'Content-Type:application/json' -d '{"x": 50, "y": 70, "w": 30, "h": 60, "color": "blue"}' localhost:8080/rect
 
+    @GetMapping("rect/{index}")
+    public Rectangle getRectByIndex(@PathVariable int index) {
+        return rectangles.get(index);
+    }
 
+    @PutMapping("rect/{index}")
+    public void updateRect(@PathVariable int index, @RequestBody Rectangle rectangle) {
+        rectangles.set(index, rectangle);
+    }
+
+    @DeleteMapping("rect/{index}")
+    public void deleteRect(@PathVariable int index) {
+        rectangles.remove(index);
+    }
 
 }
