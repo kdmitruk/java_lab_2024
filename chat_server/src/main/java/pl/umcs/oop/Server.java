@@ -17,6 +17,10 @@ public class Server {
         ss = new ServerSocket(2137);
     }
 
+    public List<String> serverUsersLogins(){
+        return clientMap.keySet().stream().toList();
+    }
+
     public void listen() throws IOException{
         while (true){
             Socket socket = ss.accept();

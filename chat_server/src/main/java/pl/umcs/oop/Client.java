@@ -17,13 +17,22 @@ public class Client implements Runnable{
         this.writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
     }
 
+    private void parseMessage(String message){
+        if(message.equals("/online")){
+            send(server.serverUsersLogins().toString());
+        }
+        else {
+            server.broadcast(message);
+        }
+    }
+
     @Override
     public void run() {
         String message;
         try {
             this.authenticate();
             while ((message = reader.readLine())!= null) {
-                server.broadcast(message);
+                parseMessage(message);
             }
             this.leave();
         } catch (IOException e) {
