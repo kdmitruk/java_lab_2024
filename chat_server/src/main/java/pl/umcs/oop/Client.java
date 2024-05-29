@@ -22,7 +22,7 @@ public class Client implements Runnable{
             send(server.serverUsersLogins().toString());
         }
         else {
-            server.broadcast(message);
+            server.broadcast(String.format("<%s> %s", getLogin(), message));
         }
     }
 
