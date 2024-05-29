@@ -9,6 +9,7 @@ public class Main {
         Client client = new Client();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         new Thread(client).start();
+
         while(true){
             client.send(reader.readLine());
         }
