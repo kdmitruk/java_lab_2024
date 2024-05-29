@@ -19,11 +19,15 @@ public class Client implements Runnable{
         String message;
         try {
             while ((message = reader.readLine())!= null) {
-                this.writer.println(message);
+                server.broadcast(message);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void send(String message) {
+        this.writer.println(message);
     }
 }
