@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="pl.umcs.oop.gui_client.HelloController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.umcs.oop.gui_client.HelloController">
   <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
@@ -13,8 +13,8 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextArea fx:id="outputArea" prefHeight="200.0" prefWidth="200.0" />
-      <TextField fx:id="textField" GridPane.rowIndex="1" />
+      <TextArea fx:id="outputArea" editable="false" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="textField" onAction="#send" GridPane.rowIndex="1" />
       <ListView fx:id="userList" prefHeight="200.0" prefWidth="300.0" GridPane.columnIndex="1" />
       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#send" text="Send" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
