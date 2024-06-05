@@ -42,7 +42,7 @@ public class Server {
             if(currentClient != loggedClient) {
                 currentClient.send(String.format("%s zalogował się", loggedClient.getLogin()));
             }
-        }
+        } System.out.println(loggedClient.getLogin());
     }
 
     public void clientLeft(Client leavingClient) {
