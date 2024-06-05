@@ -7,6 +7,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public class HelloApplication extends Application {
@@ -17,9 +18,11 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
-        ((HelloController)fxmlLoader.getController()).bindWithClient(client);
+        HelloController helloController = ((HelloController)fxmlLoader.getController());
+        helloController.bindWithClient(client);
         stage.setScene(scene);
         stage.show();
+        helloController.reloadUserList(List.of("aaa", "bbb", "ccc", "ddd"));
         TextInputDialog textInputDialog = new TextInputDialog();
         Optional<String> login = textInputDialog.showAndWait();
         if (!login.isPresent()) {
