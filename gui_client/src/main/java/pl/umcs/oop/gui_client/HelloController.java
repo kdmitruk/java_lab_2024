@@ -11,13 +11,24 @@ public class HelloController {
     private TextField textField;
     @FXML
     private TextArea outputArea;
-
+    private Client client;
 
     @FXML
     private void send() {
         System.out.println("SEND");
         String message = textField.getText();
-        outputArea.appendText(message + "\n");
         textField.clear();
+        client.send("/broadcast " + message);
+    }
+    public void receive(String message) {
+        outputArea.appendText(message + "\n");
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    public void bindWithClient(Client client) {
+        this.client = client;
+        client.setController(this);
     }
 }

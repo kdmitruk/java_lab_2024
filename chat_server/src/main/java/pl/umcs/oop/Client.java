@@ -22,7 +22,8 @@ public class Client implements Runnable{
             send(server.serverUsersLogins().toString());
         }
         else {
-            server.broadcast(String.format("<%s> %s", getLogin(), message));
+            //server.broadcast(String.format("<%s> %s", getLogin(), message));
+            server.broadcast(message);
         }
     }
 
