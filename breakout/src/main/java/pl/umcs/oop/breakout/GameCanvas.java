@@ -8,15 +8,21 @@ import java.awt.*;
 
 public class GameCanvas extends Canvas {
     private GraphicsContext gc;
+    private Paddle paddle;
     public void draw(){
         gc.setFill(Color.BLACK);
-        //GraphicsItem.setCanvasSize(640,700);
-
         gc.fillRect(0, 0, 640, 700);
+        paddle.draw(gc);
     }
 
     public void initialize(){
         gc = this.getGraphicsContext2D();
+        GraphicsItem.setCanvasSize(getWidth(), getHeight());
+        this.paddle = new Paddle();
+        this.setOnMouseMoved(mouseEvent -> {
+            paddle.setX(mouseEvent.getX());
+            draw();
+        });
         draw();
     }
 
