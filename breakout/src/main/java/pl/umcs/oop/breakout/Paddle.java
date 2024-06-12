@@ -19,5 +19,11 @@ public class Paddle extends GraphicsItem{
 
     public void setX(double x){
         this.x = x - 0.5 * width;
+        if(x < width/2){
+            this.x = 0;
+        }
+        else if (x > canvasWidth - width/2) {
+            this.x = canvasWidth - width;
+        }
     }
 }
