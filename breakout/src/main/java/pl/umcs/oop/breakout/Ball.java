@@ -20,8 +20,8 @@ public class Ball extends GraphicsItem{
         graphicsContext.fillOval(x, y, width, height);
     }
 
-    public void updatePosition() {
-        x = x + moveVector.getX();
-        y = y + moveVector.getY();
+    public void updatePosition(long diff) {
+        x = x + moveVector.getX() * diff;
+        y = y + moveVector.getY() * diff;
     }
 }
