@@ -12,13 +12,16 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        GameCanvas gc = new GameCanvas();
-        gc.initialize();
-        GridPane gp = new GridPane();
-        gp.add(gc, 0, 0);
-        Scene scene = new Scene(gp, 640, 700);
-        stage.setTitle("Breakout");
-        stage.setScene(scene);
+        GameCanvas gameCanvas = new GameCanvas();
+        stage.setTitle("Game");
+
+        GridPane pane = new GridPane();
+
+        pane.add(gameCanvas,0,0);
+        stage.setScene(new Scene(pane));
+        stage.setResizable(false);
+        gameCanvas.initialize();
+        gameCanvas.draw();
         stage.show();
     }
 
