@@ -39,7 +39,6 @@ public class Client implements Runnable{
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         writer.println(encodeBase64(image));
         writer.close();
-        System.out.println(encodeBase64(image));
     }
 
     private static String encodeBase64(BufferedImage image) throws IOException {

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EEG image</title>
+</head>
+<body>
+<!--<h3 th:text="'Username: '+${username}"></h3>-->
+<!--<h3 th:text="'Electrode: '+${electrode}"></h3>-->
+<h3>Image:</h3>
+<div>
+    <img th:src="'data:image/png;base64,' + ${image}" alt="image"/>
+</div>
+</body>
+</html>
