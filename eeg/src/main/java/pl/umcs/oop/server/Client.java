@@ -28,7 +28,7 @@ public class Client implements Runnable{
 
     public void generate(int index) throws IOException {
         List<Float> dataLine = data.get(index);
-        BufferedImage image = new BufferedImage(dataLine.size(), 40, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(dataLine.size(), 140, BufferedImage.TYPE_INT_ARGB);
         for(int i = 0; i < dataLine.size(); i++) {
             int y0 = image.getHeight() / 2;
             int y = (int) (-dataLine.get(i) + y0);
@@ -39,6 +39,7 @@ public class Client implements Runnable{
         PrintWriter writer = new PrintWriter(new FileWriter(file));
         writer.println(encodeBase64(image));
         writer.close();
+        System.out.println("line");
     }
 
     private static String encodeBase64(BufferedImage image) throws IOException {
@@ -52,7 +53,7 @@ public class Client implements Runnable{
     public void run() {
         String message;
         try {
-            while ((message = reader.readLine())!= null && !message.equals("Bye")) {
+            while ((message = reader.readLine())!= null) {
                 parseMessage(message);
                 generate(data.size() - 1);
             }
