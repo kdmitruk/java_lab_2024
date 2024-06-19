@@ -35,6 +35,10 @@ public class Client implements Runnable{
             image.setRGB(i, y, 0xffff0000);
         }
         //ImageIO.write(image, "png", new File("/tmp/image.png"));
+        File file = new File("/tmp/data.txt");
+        PrintWriter writer = new PrintWriter(new FileWriter(file));
+        writer.println(encodeBase64(image));
+        writer.close();
         System.out.println(encodeBase64(image));
     }
 
